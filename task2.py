@@ -3,11 +3,10 @@ from typing import Callable
 
 def generator_numbers(text: str):
     while text:
-        text_part_match=re.search(r"\D*?\s\d+(\.\d+)?",text)
-        if text_part_match:
-            text_part=text_part_match.group()
-            yield float(text_part.split(" ")[-1])
-            text = text[text_part_match.end():]
+        number_text_match=re.search(r" \d+?(\.\d+)? ", text)
+        if number_text_match:
+            yield float(number_text_match.group().strip())
+            text = text[number_text_match.end():]
         else:
             break
 

@@ -3,7 +3,15 @@ def input_error(func):
         try:
             return func(*args, **kwargs)
         except (KeyError, ValueError, IndexError):
-            return "Enter the argument for the command"
+            if func.__name__=="add_contact":
+                return ("Enter the argument for the command\n"
+                        "Correct format for input: 'add [name] [phone number]'")
+            if func.__name__=="change_contact":
+                return ("Enter the argument for the command\n"
+                        "Correct format for input: 'change [name] [new phone number]'")
+            if func.__name__=="show_phone":
+                return ("Enter the argument for the command\n"
+                        "Correct format for input: 'phone [name]'")
     return inner
 
 def parse_input(user_input):
